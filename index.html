@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Moritz Nottebaum</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --accent: #2563eb;
+      --text: #1a1a1a;
+      --muted: #555;
+      --border: #e0e0e0;
+      --bg: #fafafa;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      font-size: 16px;
+      line-height: 1.65;
+      color: var(--text);
+      background: var(--bg);
+    }
+
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* ── Layout ── */
+    .page { max-width: 780px; margin: 0 auto; padding: 0 1.5rem; }
+
+    nav {
+      border-bottom: 1px solid var(--border);
+      padding: 1rem 0;
+    }
+    nav .inner {
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    nav .name { font-weight: 600; font-size: 1rem; }
+    nav .links { display: flex; gap: 1.5rem; font-size: 0.9rem; color: var(--muted); }
+    nav .links a { color: var(--muted); }
+    nav .links a:hover { color: var(--accent); text-decoration: none; }
+
+    /* ── Hero ── */
+    .hero {
+      display: flex;
+      gap: 2.5rem;
+      align-items: flex-start;
+      padding: 3rem 0 2.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .hero-text h1 { font-size: 1.9rem; font-weight: 700; margin-bottom: 0.3rem; }
+    .hero-text .role { font-size: 1rem; color: var(--muted); margin-bottom: 1rem; }
+    .hero-text p { font-size: 0.97rem; color: #333; max-width: 520px; }
+    .hero-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      margin-top: 1.2rem;
+    }
+    .hero-links a {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.85rem;
+      border: 1px solid var(--border);
+      border-radius: 5px;
+      padding: 0.3rem 0.75rem;
+      color: var(--muted);
+      background: #fff;
+    }
+    .hero-links a:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    /* ── Sections ── */
+    section { padding: 2.5rem 0; border-bottom: 1px solid var(--border); }
+    section:last-of-type { border-bottom: none; }
+    h2 { font-size: 1.1rem; font-weight: 700; text-transform: uppercase;
+         letter-spacing: 0.06em; color: var(--muted); margin-bottom: 1.3rem; }
+
+    /* ── Interests ── */
+    .interests { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+    .tag {
+      background: #eff6ff;
+      color: var(--accent);
+      border-radius: 4px;
+      padding: 0.25rem 0.7rem;
+      font-size: 0.85rem;
+    }
+
+    /* ── Publications ── */
+    .pub-list { display: flex; flex-direction: column; gap: 1.5rem; }
+    .pub {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.1rem 1.3rem;
+    }
+    .pub-venue {
+      font-size: 0.78rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--accent);
+      margin-bottom: 0.3rem;
+    }
+    .pub-title { font-size: 1rem; font-weight: 600; margin-bottom: 0.25rem; }
+    .pub-authors { font-size: 0.88rem; color: var(--muted); margin-bottom: 0.6rem; }
+    .pub-authors strong { color: var(--text); }
+    .pub-links { display: flex; gap: 0.6rem; }
+    .pub-links a {
+      font-size: 0.8rem;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 0.15rem 0.6rem;
+      color: var(--muted);
+    }
+    .pub-links a:hover { border-color: var(--accent); color: var(--accent); text-decoration: none; }
+
+    /* ── Footer ── */
+    footer {
+      padding: 1.5rem 0;
+      font-size: 0.82rem;
+      color: #aaa;
+      text-align: center;
+    }
+
+    @media (max-width: 560px) {
+      .hero { flex-direction: column; gap: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="inner">
+    <span class="name">Moritz Nottebaum</span>
+    <div class="links">
+      <a href="#research">Research</a>
+      <a href="#publications">Publications</a>
+    </div>
+  </div>
+</nav>
+
+<main class="page">
+
+  <!-- Hero -->
+  <div class="hero">
+    <div class="hero-text">
+      <h1>Moritz Nottebaum</h1>
+      <p class="role">PhD Candidate &middot; University of Udine &middot; DMIF</p>
+      <p>
+        I am a PhD student in the Machine Learning and Perception Lab at the
+        University of Udine, advised by
+        <a href="https://machinelearning.uniud.it/team/christian-micheloni/">Christian Micheloni</a>.
+        My research focuses on hardware-efficient neural network design for efficient
+        inference &mdash; specifically, building vision backbones that are fast on
+        real hardware beyond just counting multiply-accumulate operations.
+      </p>
+      <div class="hero-links">
+        <a href="https://scholar.google.com/citations?user=y7paI7EAAAAJ&hl=de" target="_blank">
+          &#x1F393; Google Scholar
+        </a>
+        <a href="https://github.com/altair199797" target="_blank">
+          &#x1F4BB; GitHub
+        </a>
+        <a href="https://www.linkedin.com/in/moritz-nottebaum-3179a9213/" target="_blank">
+          &#x1F517; LinkedIn
+        </a>
+        <a href="https://openreview.net/profile?id=~Moritz_Nottebaum1" target="_blank">
+          &#x1F4C4; OpenReview
+        </a>
+        <a href="mailto:moritz@nottebaum-online.de">
+          &#x2709;&#xFE0F; Email
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Research Interests -->
+  <section id="research">
+    <h2>Research Interests</h2>
+    <div class="interests">
+      <span class="tag">Hardware-Efficient Neural Networks</span>
+      <span class="tag">Vision Backbones</span>
+      <span class="tag">Convolutional &amp; Transformer Architectures</span>
+      <span class="tag">Video Frame Interpolation</span>
+      <span class="tag">Object Detection &amp; Tracking</span>
+      <span class="tag">Egocentric Vision</span>
+      <span class="tag">Computer Vision</span>
+      <span class="tag">Machine Learning</span>
+    </div>
+  </section>
+
+  <!-- Publications -->
+  <section id="publications">
+    <h2>Publications</h2>
+    <div class="pub-list">
+
+      <div class="pub">
+        <div class="pub-venue">WACV 2025</div>
+        <div class="pub-title">LowFormer: Hardware Efficient Design for Convolutional Transformer Backbones</div>
+        <div class="pub-authors"><strong>Moritz Nottebaum</strong>, Matteo Dunnhofer, Christian Micheloni</div>
+        <div class="pub-links">
+          <a href="https://arxiv.org/abs/2409.03460" target="_blank">arXiv</a>
+          <a href="https://openaccess.thecvf.com/content/WACV2025/html/Nottebaum_LowFormer_Hardware_Efficient_Design_for_Convolutional_Transformer_Backbones_WACV2025_paper.html" target="_blank">WACV</a>
+          <a href="https://github.com/altair199797/LowFormer" target="_blank">Code</a>
+        </div>
+      </div>
+
+      <div class="pub">
+        <div class="pub-venue">2025</div>
+        <div class="pub-title">CPUBone: Efficient Vision Backbone Design for Devices with Low Parallelization Capabilities</div>
+        <div class="pub-authors"><strong>Moritz Nottebaum</strong>, Christian Micheloni</div>
+        <div class="pub-links">
+          <a href="https://scholar.google.com/citations?user=y7paI7EAAAAJ&hl=de" target="_blank">Scholar</a>
+        </div>
+      </div>
+
+      <div class="pub">
+        <div class="pub-venue">arXiv 2024</div>
+        <div class="pub-title">Online Episodic Memory Visual Query Localization with Egocentric Streaming Object Memory</div>
+        <div class="pub-authors"><strong>Moritz Nottebaum</strong> et al.</div>
+        <div class="pub-links">
+          <a href="https://arxiv.org/abs/2411.16934" target="_blank">arXiv</a>
+        </div>
+      </div>
+
+      <div class="pub">
+        <div class="pub-venue">BMVC 2022</div>
+        <div class="pub-title">Efficient Feature Extraction for High-resolution Video Frame Interpolation</div>
+        <div class="pub-authors"><strong>Moritz Nottebaum</strong>, Stefan Roth, Simone Schaub-Meyer</div>
+        <div class="pub-links">
+          <a href="https://arxiv.org/abs/2211.14005" target="_blank">arXiv</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<footer class="page">
+  Moritz Nottebaum &middot; University of Udine &middot; 2026
+</footer>
+
+</body>
+</html>
