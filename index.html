@@ -4,337 +4,465 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Moritz Nottebaum</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --accent: #2563eb;
-      --text: #1a1a1a;
-      --muted: #555;
+      --nav-bg: #494e52;
+      --accent: #52adc8;
+      --accent-dark: #3d8fa8;
+      --text: #333;
+      --muted: #7a8288;
       --border: #e0e0e0;
-      --bg: #fafafa;
+      --sidebar-w: 230px;
     }
 
     body {
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      font-size: 16px;
+      font-size: 15px;
       line-height: 1.65;
       color: var(--text);
-      background: var(--bg);
+      background: #fff;
     }
 
     a { color: var(--accent); text-decoration: none; }
-    a:hover { text-decoration: underline; }
+    a:hover { color: var(--accent-dark); text-decoration: underline; }
 
-    /* ── Layout ── */
-    .page { max-width: 780px; margin: 0 auto; padding: 0 1.5rem; }
-
-    nav {
-      border-bottom: 1px solid var(--border);
-      padding: 1rem 0;
-    }
-    nav .inner {
-      max-width: 780px;
-      margin: 0 auto;
-      padding: 0 1.5rem;
+    /* ── Masthead ── */
+    .masthead {
+      background: var(--nav-bg);
+      padding: 0.9rem 1.5rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
     }
-    nav .name { font-weight: 600; font-size: 1rem; }
-    nav .links { display: flex; gap: 1.5rem; font-size: 0.9rem; color: var(--muted); }
-    nav .links a { color: var(--muted); }
-    nav .links a:hover { color: var(--accent); text-decoration: none; }
+    .masthead__title {
+      color: #fff;
+      font-size: 1rem;
+      font-weight: 700;
+      text-decoration: none;
+      letter-spacing: 0.02em;
+    }
+    .masthead__title:hover { color: #fff; text-decoration: none; }
+    .masthead__nav { display: flex; gap: 1.6rem; }
+    .masthead__nav a {
+      color: rgba(255,255,255,0.8);
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+    .masthead__nav a:hover { color: #fff; text-decoration: none; }
 
-    /* ── Hero ── */
-    .hero {
+    /* ── Page layout ── */
+    .page-wrap {
       display: flex;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem;
       gap: 2.5rem;
       align-items: flex-start;
-      padding: 3rem 0 2.5rem;
+    }
+
+    /* ── Sidebar ── */
+    .sidebar {
+      width: var(--sidebar-w);
+      flex-shrink: 0;
+      position: sticky;
+      top: 4rem;
+    }
+    .author__avatar img {
+      width: 100%;
+      max-width: 200px;
+      border-radius: 4px;
+      display: block;
+      margin-bottom: 0.9rem;
+    }
+    .author__name {
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 0.2rem;
+      color: #222;
+    }
+    .author__bio {
+      font-size: 0.82rem;
+      color: var(--muted);
+      margin-bottom: 1rem;
+      line-height: 1.5;
+    }
+    .author__urls {
+      list-style: none;
+      padding: 0;
+      border-top: 1px solid var(--border);
+      padding-top: 0.8rem;
+    }
+    .author__urls li {
+      margin-bottom: 0.45rem;
+    }
+    .author__urls a {
+      color: var(--text);
+      font-size: 0.82rem;
+      display: flex;
+      align-items: center;
+      gap: 0.55rem;
+    }
+    .author__urls a:hover { color: var(--accent); text-decoration: none; }
+    .author__urls i {
+      width: 16px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+    .author__urls a:hover i { color: var(--accent); }
+
+    /* ── Main content ── */
+    .main-content { flex: 1; min-width: 0; }
+
+    .section { margin-bottom: 2.5rem; }
+    .section__title {
+      font-size: 1rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      color: var(--muted);
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 0.4rem;
+      margin-bottom: 1.1rem;
+    }
+
+    /* About */
+    .about p {
+      font-size: 0.95rem;
+      margin-bottom: 0.9rem;
+      color: #333;
+    }
+    .about p:last-child { margin-bottom: 0; }
+
+    /* News */
+    .news-list { list-style: none; }
+    .news-list li {
+      font-size: 0.88rem;
+      padding: 0.35rem 0;
+      border-bottom: 1px dashed var(--border);
+      line-height: 1.5;
+    }
+    .news-list li:last-child { border-bottom: none; }
+    .news-date {
+      font-size: 0.78rem;
+      color: var(--muted);
+      font-weight: 600;
+      margin-right: 0.4rem;
+      white-space: nowrap;
+    }
+
+    /* Publications */
+    .pub-entry {
+      padding: 0.9rem 0;
       border-bottom: 1px solid var(--border);
     }
-    .hero-text { flex: 1; min-width: 0; }
-    .hero-text .role { font-size: 1.15rem; font-weight: 600; color: var(--text); margin-bottom: 0.4rem; }
-    .hero-text .affil { font-size: 0.95rem; color: var(--muted); margin-bottom: 1rem; }
-    .hero-text p { font-size: 0.97rem; color: #333; }
-    .hero-photo {
-      width: 148px;
-      height: 148px;
-      border-radius: 50%;
-      object-fit: cover;
-      flex-shrink: 0;
-      border: 3px solid var(--border);
+    .pub-entry:last-child { border-bottom: none; }
+    .pub-entry__title {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: #222;
+      margin-bottom: 0.2rem;
+      line-height: 1.4;
     }
-    .hero-links {
+    .pub-entry__authors {
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-bottom: 0.2rem;
+    }
+    .pub-entry__authors strong { color: var(--text); font-weight: 600; }
+    .pub-entry__venue {
+      font-size: 0.85rem;
+      font-style: italic;
+      color: var(--text);
+      margin-bottom: 0.45rem;
+    }
+    .pub-entry__venue .venue-label {
+      font-style: normal;
+      font-weight: 600;
+      color: var(--accent-dark);
+    }
+    .pub-entry__tags {
       display: flex;
       flex-wrap: wrap;
-      gap: 0.6rem;
-      margin-top: 1.2rem;
+      gap: 0.35rem;
+      margin-bottom: 0.45rem;
     }
-    .hero-links a {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-      font-size: 0.85rem;
+    .pub-tag {
+      font-size: 0.72rem;
+      background: #eef7fb;
+      color: var(--accent-dark);
+      border-radius: 3px;
+      padding: 0.1rem 0.45rem;
+    }
+    .pub-entry__links { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+    .pub-entry__links a {
+      font-size: 0.78rem;
       border: 1px solid var(--border);
-      border-radius: 5px;
-      padding: 0.3rem 0.75rem;
+      border-radius: 3px;
+      padding: 0.1rem 0.5rem;
       color: var(--muted);
-      background: #fff;
+      background: #fafafa;
     }
-    .hero-links a:hover {
+    .pub-entry__links a:hover {
       border-color: var(--accent);
       color: var(--accent);
       text-decoration: none;
+      background: #fff;
     }
 
-    /* ── Sections ── */
-    section { padding: 2.5rem 0; border-bottom: 1px solid var(--border); }
-    section:last-of-type { border-bottom: none; }
-    h2 { font-size: 1.1rem; font-weight: 700; text-transform: uppercase;
-         letter-spacing: 0.06em; color: var(--muted); margin-bottom: 1.3rem; }
-
-    /* ── Interests ── */
+    /* Research interests tags */
     .interests { display: flex; flex-wrap: wrap; gap: 0.5rem; }
     .tag {
-      background: #eff6ff;
-      color: var(--accent);
+      background: #eef7fb;
+      color: var(--accent-dark);
       border-radius: 4px;
       padding: 0.25rem 0.7rem;
-      font-size: 0.85rem;
+      font-size: 0.83rem;
     }
 
-    /* ── Publications ── */
-    .pub-list { display: flex; flex-direction: column; gap: 1.5rem; }
-    .pub {
-      background: #fff;
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 1.1rem 1.3rem;
-    }
-    .pub-venue {
-      font-size: 0.78rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      color: var(--accent);
-      margin-bottom: 0.3rem;
-    }
-    .pub-title { font-size: 1rem; font-weight: 600; margin-bottom: 0.25rem; }
-    .pub-authors { font-size: 0.88rem; color: var(--muted); margin-bottom: 0.5rem; }
-    .pub-authors strong { color: var(--text); }
-    .pub-meta {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      gap: 0.5rem;
-      margin-bottom: 0.6rem;
-    }
-    .pub-tag {
-      background: #eff6ff;
-      color: var(--accent);
-      border-radius: 3px;
-      padding: 0.15rem 0.5rem;
-      font-size: 0.75rem;
-    }
-    .pub-links { display: flex; gap: 0.6rem; flex-wrap: wrap; }
-    .pub-links a {
-      font-size: 0.8rem;
-      border: 1px solid var(--border);
-      border-radius: 4px;
-      padding: 0.15rem 0.6rem;
-      color: var(--muted);
-    }
-    .pub-links a:hover { border-color: var(--accent); color: var(--accent); text-decoration: none; }
-
-    /* ── Footer ── */
-    footer {
-      padding: 1.5rem 0;
-      font-size: 0.82rem;
-      color: #aaa;
-      text-align: center;
-    }
-
-    @media (max-width: 580px) {
-      .hero { flex-direction: column-reverse; gap: 1.5rem; align-items: center; }
-      .hero-photo { width: 110px; height: 110px; }
+    /* ── Responsive ── */
+    @media (max-width: 680px) {
+      .page-wrap { flex-direction: column; gap: 1.5rem; }
+      .sidebar { width: 100%; position: static; display: flex; gap: 1.2rem; align-items: flex-start; }
+      .author__avatar img { max-width: 110px; }
+      .masthead__nav { gap: 0.9rem; }
     }
   </style>
 </head>
 <body>
 
-<nav>
-  <div class="inner">
-    <span class="name">Moritz Nottebaum</span>
-    <div class="links">
-      <a href="#research">Research</a>
-      <a href="#publications">Publications</a>
+<!-- Masthead -->
+<header class="masthead">
+  <a class="masthead__title" href="#">Moritz Nottebaum</a>
+  <nav class="masthead__nav">
+    <a href="#about">About</a>
+    <a href="#publications">Publications</a>
+    <a href="#research">Research</a>
+  </nav>
+</header>
+
+<div class="page-wrap">
+
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="author__avatar">
+      <img src="assets/profpic.jpg" alt="Moritz Nottebaum" />
     </div>
-  </div>
-</nav>
-
-<main class="page">
-
-  <!-- Hero -->
-  <div class="hero">
-    <div class="hero-text">
-      <p class="role">Computer Vision Researcher</p>
-      <p class="affil">PhD Candidate &middot; University of Udine &middot; DMIF</p>
-      <p>
-        I am a computer vision researcher and PhD student in the Machine Learning and
-        Perception Lab at the University of Udine, advised by
-        <a href="https://machinelearning.uniud.it/team/christian-micheloni/">Christian Micheloni</a>.
-        My research focuses on hardware-efficient neural network design for efficient
-        inference &mdash; in particular, building vision backbones that achieve better
-        speed-accuracy trade-offs on real hardware by going beyond traditional
-        multiply-accumulate (MAC) count metrics. I also work on egocentric vision,
-        video frame interpolation, and object tracking.
-      </p>
-      <div class="hero-links">
-        <a href="https://scholar.google.com/citations?user=y7paI7EAAAAJ&hl=de" target="_blank">
-          &#x1F393; Google Scholar
-        </a>
-        <a href="https://github.com/altair199797" target="_blank">
-          &#x1F4BB; GitHub
-        </a>
-        <a href="https://www.linkedin.com/in/moritz-nottebaum-3179a9213/" target="_blank">
-          &#x1F517; LinkedIn
-        </a>
-        <a href="https://openreview.net/profile?id=~Moritz_Nottebaum1" target="_blank">
-          &#x1F4C4; OpenReview
-        </a>
+    <div class="author__name">Moritz Nottebaum</div>
+    <div class="author__bio">
+      PhD Candidate<br>
+      University of Udine, DMIF<br>
+      Computer Vision &amp; ML
+    </div>
+    <ul class="author__urls">
+      <li>
         <a href="mailto:moritz@nottebaum-online.de">
-          &#x2709;&#xFE0F; Email
+          <i class="fas fa-fw fa-envelope"></i> moritz@nottebaum-online.de
         </a>
+      </li>
+      <li>
+        <a href="https://scholar.google.com/citations?user=y7paI7EAAAAJ&hl=de" target="_blank">
+          <i class="fas fa-fw fa-graduation-cap"></i> Google Scholar
+        </a>
+      </li>
+      <li>
+        <a href="https://github.com/altair199797" target="_blank">
+          <i class="fab fa-fw fa-github"></i> GitHub
+        </a>
+      </li>
+      <li>
+        <a href="https://www.linkedin.com/in/moritz-nottebaum-3179a9213/" target="_blank">
+          <i class="fab fa-fw fa-linkedin"></i> LinkedIn
+        </a>
+      </li>
+      <li>
+        <a href="https://openreview.net/profile?id=~Moritz_Nottebaum1" target="_blank">
+          <i class="fas fa-fw fa-file-alt"></i> OpenReview
+        </a>
+      </li>
+      <li>
+        <a href="https://machinelearning.uniud.it/team/moritz-nottebaum/" target="_blank">
+          <i class="fas fa-fw fa-university"></i> Lab Page
+        </a>
+      </li>
+    </ul>
+  </aside>
+
+  <!-- Main content -->
+  <main class="main-content">
+
+    <section id="about" class="section about">
+      <h2 class="section__title">About me</h2>
+      <p>
+        I am a computer vision researcher and PhD student in the
+        <a href="https://machinelearning.uniud.it/" target="_blank">Machine Learning and Perception Lab</a>
+        at the University of Udine, advised by
+        <a href="https://machinelearning.uniud.it/team/christian-micheloni/" target="_blank">Christian Micheloni</a>.
+        My research focuses on hardware-efficient neural network design for efficient inference &mdash;
+        in particular, building vision backbones that achieve better speed-accuracy trade-offs on real
+        hardware by going beyond traditional multiply-accumulate (MAC) count metrics.
+      </p>
+      <p>
+        I also work on egocentric vision, video frame interpolation, and object tracking.
+        Previously, I received my M.Sc. in Informatik from TU Darmstadt (2020&ndash;2022).
+      </p>
+    </section>
+
+    <section id="news" class="section">
+      <h2 class="section__title">News</h2>
+      <ul class="news-list">
+        <li>
+          <span class="news-date">Jun 2026</span>
+          Paper <em>CPUBone</em> accepted at <strong>CVPR Findings 2026</strong>.
+        </li>
+        <li>
+          <span class="news-date">2026</span>
+          <em>Beyond MACs: Hardware Efficient Architecture Design for Vision Backbones</em>
+          published in <strong>IJCV</strong>.
+        </li>
+        <li>
+          <span class="news-date">Jan 2026</span>
+          Paper on <em>Online Episodic Memory Visual Query Localization</em> accepted at <strong>WACV 2026</strong>.
+        </li>
+        <li>
+          <span class="news-date">Sep 2025</span>
+          <em>T-EVO</em> accepted at <strong>ICIAP 2025</strong>.
+        </li>
+        <li>
+          <span class="news-date">Jan 2025</span>
+          <em>LowFormer</em> presented at <strong>WACV 2025</strong>.
+        </li>
+      </ul>
+    </section>
+
+    <section id="research" class="section">
+      <h2 class="section__title">Research Interests</h2>
+      <div class="interests">
+        <span class="tag">Hardware-Efficient Neural Networks</span>
+        <span class="tag">Vision Backbones</span>
+        <span class="tag">Convolutional &amp; Transformer Architectures</span>
+        <span class="tag">Efficient Inference</span>
+        <span class="tag">Video Frame Interpolation</span>
+        <span class="tag">Object Detection &amp; Tracking</span>
+        <span class="tag">Egocentric Vision</span>
+        <span class="tag">Person Re-Identification</span>
       </div>
-    </div>
-    <img class="hero-photo" src="assets/profpic.jpg" alt="Moritz Nottebaum" />
-  </div>
+    </section>
 
-  <!-- Research Interests -->
-  <section id="research">
-    <h2>Research Interests</h2>
-    <div class="interests">
-      <span class="tag">Hardware-Efficient Neural Networks</span>
-      <span class="tag">Vision Backbones</span>
-      <span class="tag">Convolutional &amp; Transformer Architectures</span>
-      <span class="tag">Efficient Inference</span>
-      <span class="tag">Video Frame Interpolation</span>
-      <span class="tag">Object Detection &amp; Tracking</span>
-      <span class="tag">Egocentric Vision</span>
-      <span class="tag">Person Re-Identification</span>
-    </div>
-  </section>
+    <section id="publications" class="section">
+      <h2 class="section__title">Publications</h2>
 
-  <!-- Publications -->
-  <section id="publications">
-    <h2>Publications</h2>
-    <div class="pub-list">
-
-      <div class="pub">
-        <div class="pub-venue">CVPR Findings 2026</div>
-        <div class="pub-title">CPUBone: Efficient Vision Backbone Design for Devices with Low Parallelization Capabilities</div>
-        <div class="pub-authors"><strong>Moritz Nottebaum</strong>, Matteo Dunnhofer, Christian Micheloni</div>
-        <div class="pub-meta">
+      <div class="pub-entry">
+        <div class="pub-entry__title">CPUBone: Efficient Vision Backbone Design for Devices with Low Parallelization Capabilities</div>
+        <div class="pub-entry__authors"><strong>Moritz Nottebaum</strong>, Matteo Dunnhofer, Christian Micheloni</div>
+        <div class="pub-entry__venue"><span class="venue-label">CVPR Findings</span>, 2026</div>
+        <div class="pub-entry__tags">
           <span class="pub-tag">Hardware-Efficient Neural Networks</span>
           <span class="pub-tag">Vision Backbones</span>
           <span class="pub-tag">Efficient Inference</span>
         </div>
-        <div class="pub-links">
+        <div class="pub-entry__links">
           <a href="https://arxiv.org/abs/2603.26425" target="_blank">arXiv</a>
           <a href="https://github.com/altair199797/CPUBone" target="_blank">Code</a>
         </div>
       </div>
 
-      <div class="pub">
-        <div class="pub-venue">IJCV 2026</div>
-        <div class="pub-title">Beyond MACs: Hardware Efficient Architecture Design for Vision Backbones</div>
-        <div class="pub-authors"><strong>Moritz Nottebaum</strong>, Matteo Dunnhofer, Christian Micheloni</div>
-        <div class="pub-meta">
+      <div class="pub-entry">
+        <div class="pub-entry__title">Beyond MACs: Hardware Efficient Architecture Design for Vision Backbones</div>
+        <div class="pub-entry__authors"><strong>Moritz Nottebaum</strong>, Matteo Dunnhofer, Christian Micheloni</div>
+        <div class="pub-entry__venue"><span class="venue-label">International Journal of Computer Vision (IJCV)</span>, 2026</div>
+        <div class="pub-entry__tags">
           <span class="pub-tag">Hardware-Efficient Neural Networks</span>
           <span class="pub-tag">Vision Backbones</span>
           <span class="pub-tag">Efficient Inference</span>
         </div>
-        <div class="pub-links">
+        <div class="pub-entry__links">
           <a href="https://arxiv.org/abs/2603.26551" target="_blank">arXiv</a>
           <a href="https://doi.org/10.1007/s11263-026-02873-5" target="_blank">IJCV</a>
         </div>
       </div>
 
-      <div class="pub">
-        <div class="pub-venue">WACV 2026</div>
-        <div class="pub-title">Online Episodic Memory Visual Query Localization with Egocentric Streaming Object Memory</div>
-        <div class="pub-authors"><strong>Moritz Nottebaum</strong>, Zaira Manigrasso, Matteo Dunnhofer, Antonino Furnari, Antonio Finocchiaro, Davide Marana, Rosario Forte, Giovanni Maria Farinella, Christian Micheloni</div>
-        <div class="pub-meta">
+      <div class="pub-entry">
+        <div class="pub-entry__title">Online Episodic Memory Visual Query Localization with Egocentric Streaming Object Memory</div>
+        <div class="pub-entry__authors"><strong>Moritz Nottebaum</strong>, Zaira Manigrasso, Matteo Dunnhofer, Antonino Furnari, Antonio Finocchiaro, Davide Marana, Rosario Forte, Giovanni Maria Farinella, Christian Micheloni</div>
+        <div class="pub-entry__venue"><span class="venue-label">WACV</span>, 2026</div>
+        <div class="pub-entry__tags">
           <span class="pub-tag">Egocentric Vision</span>
           <span class="pub-tag">Object Detection &amp; Tracking</span>
         </div>
-        <div class="pub-links">
+        <div class="pub-entry__links">
           <a href="https://arxiv.org/abs/2411.16934" target="_blank">arXiv</a>
         </div>
       </div>
 
-      <div class="pub">
-        <div class="pub-venue">ICIAP 2025</div>
-        <div class="pub-title">T-EVO: Tracking in Egovision for Online Visual Episodic Memory</div>
-        <div class="pub-authors"><strong>Moritz Nottebaum</strong>, Zaira Manigrasso, Antonio Finocchiaro, Davide Marana, Rosario Forte, Matteo Dunnhofer, Giovanni Maria Farinella, Antonino Furnari, Christian Micheloni</div>
-        <div class="pub-meta">
+      <div class="pub-entry">
+        <div class="pub-entry__title">T-EVO: Tracking in Egovision for Online Visual Episodic Memory</div>
+        <div class="pub-entry__authors"><strong>Moritz Nottebaum</strong>, Zaira Manigrasso, Antonio Finocchiaro, Davide Marana, Rosario Forte, Matteo Dunnhofer, Giovanni Maria Farinella, Antonino Furnari, Christian Micheloni</div>
+        <div class="pub-entry__venue"><span class="venue-label">ICIAP</span>, 2025 &mdash; Springer LNCS</div>
+        <div class="pub-entry__tags">
           <span class="pub-tag">Egocentric Vision</span>
           <span class="pub-tag">Object Detection &amp; Tracking</span>
         </div>
-        <div class="pub-links">
+        <div class="pub-entry__links">
         </div>
       </div>
 
-      <div class="pub">
-        <div class="pub-venue">WACV 2025</div>
-        <div class="pub-title">LowFormer: Hardware Efficient Design for Convolutional Transformer Backbones</div>
-        <div class="pub-authors"><strong>Moritz Nottebaum</strong>, Matteo Dunnhofer, Christian Micheloni</div>
-        <div class="pub-meta">
+      <div class="pub-entry">
+        <div class="pub-entry__title">LowFormer: Hardware Efficient Design for Convolutional Transformer Backbones</div>
+        <div class="pub-entry__authors"><strong>Moritz Nottebaum</strong>, Matteo Dunnhofer, Christian Micheloni</div>
+        <div class="pub-entry__venue"><span class="venue-label">WACV</span>, 2025</div>
+        <div class="pub-entry__tags">
           <span class="pub-tag">Hardware-Efficient Neural Networks</span>
           <span class="pub-tag">Vision Backbones</span>
           <span class="pub-tag">Convolutional &amp; Transformer Architectures</span>
         </div>
-        <div class="pub-links">
+        <div class="pub-entry__links">
           <a href="https://arxiv.org/abs/2409.03460" target="_blank">arXiv</a>
           <a href="https://openaccess.thecvf.com/content/WACV2025/html/Nottebaum_LowFormer_Hardware_Efficient_Design_for_Convolutional_Transformer_Backbones_WACV2025_paper.html" target="_blank">WACV</a>
           <a href="https://github.com/altair199797/LowFormer" target="_blank">Code</a>
         </div>
       </div>
 
-      <div class="pub">
-        <div class="pub-venue">BMVC 2022</div>
-        <div class="pub-title">Efficient Feature Extraction for High-resolution Video Frame Interpolation</div>
-        <div class="pub-authors"><strong>Moritz Nottebaum</strong>, Stefan Roth, Simone Schaub-Meyer</div>
-        <div class="pub-meta">
+      <div class="pub-entry">
+        <div class="pub-entry__title">Efficient Feature Extraction for High-resolution Video Frame Interpolation</div>
+        <div class="pub-entry__authors"><strong>Moritz Nottebaum</strong>, Stefan Roth, Simone Schaub-Meyer</div>
+        <div class="pub-entry__venue"><span class="venue-label">BMVC</span>, 2022</div>
+        <div class="pub-entry__tags">
           <span class="pub-tag">Video Frame Interpolation</span>
         </div>
-        <div class="pub-links">
+        <div class="pub-entry__links">
           <a href="https://arxiv.org/abs/2211.14005" target="_blank">arXiv</a>
           <a href="https://bmvc2022.mpi-inf.mpg.de/825/" target="_blank">BMVC</a>
           <a href="https://github.com/visinf/fldr-vfi" target="_blank">Code</a>
         </div>
       </div>
 
-      <div class="pub">
-        <div class="pub-venue">PETRA 2020</div>
-        <div class="pub-title">Person Re-Identification in a Car Seat: Comparison of Cosine Similarity and Triplet Loss based approaches on Capacitive Proximity Sensing data</div>
-        <div class="pub-authors"><strong>Moritz Nottebaum</strong>, Arjan Kuijper, Silvia Rus (Fraunhofer IGD / TU Darmstadt)</div>
-        <div class="pub-meta">
+      <div class="pub-entry">
+        <div class="pub-entry__title">Person Re-Identification in a Car Seat: Comparison of Cosine Similarity and Triplet Loss based approaches on Capacitive Proximity Sensing data</div>
+        <div class="pub-entry__authors"><strong>Moritz Nottebaum</strong>, Arjan Kuijper, Silvia Rus</div>
+        <div class="pub-entry__venue"><span class="venue-label">PETRA</span>, 2020</div>
+        <div class="pub-entry__tags">
           <span class="pub-tag">Person Re-Identification</span>
         </div>
-        <div class="pub-links">
+        <div class="pub-entry__links">
           <a href="http://publica.fraunhofer.de/dokumente/N-578625.html" target="_blank">Fraunhofer Publica</a>
         </div>
       </div>
 
-    </div>
-  </section>
+    </section>
 
-</main>
+  </main>
+</div>
 
-<footer class="page">
+<footer style="text-align:center; padding: 1.5rem; font-size:0.78rem; color:#aaa; border-top:1px solid #eee; margin-top:1rem;">
   Moritz Nottebaum &middot; University of Udine &middot; 2026
 </footer>
 
