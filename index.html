@@ -54,9 +54,18 @@
       padding: 3rem 0 2.5rem;
       border-bottom: 1px solid var(--border);
     }
+    .hero-text { flex: 1; min-width: 0; }
     .hero-text h1 { font-size: 1.9rem; font-weight: 700; margin-bottom: 0.3rem; }
     .hero-text .role { font-size: 1rem; color: var(--muted); margin-bottom: 1rem; }
-    .hero-text p { font-size: 0.97rem; color: #333; max-width: 520px; }
+    .hero-text p { font-size: 0.97rem; color: #333; }
+    .hero-photo {
+      width: 148px;
+      height: 148px;
+      border-radius: 50%;
+      object-fit: cover;
+      flex-shrink: 0;
+      border: 3px solid var(--border);
+    }
     .hero-links {
       display: flex;
       flex-wrap: wrap;
@@ -113,9 +122,23 @@
       margin-bottom: 0.3rem;
     }
     .pub-title { font-size: 1rem; font-weight: 600; margin-bottom: 0.25rem; }
-    .pub-authors { font-size: 0.88rem; color: var(--muted); margin-bottom: 0.6rem; }
+    .pub-authors { font-size: 0.88rem; color: var(--muted); margin-bottom: 0.5rem; }
     .pub-authors strong { color: var(--text); }
-    .pub-links { display: flex; gap: 0.6rem; }
+    .pub-meta {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 0.6rem;
+    }
+    .pub-tag {
+      background: #eff6ff;
+      color: var(--accent);
+      border-radius: 3px;
+      padding: 0.15rem 0.5rem;
+      font-size: 0.75rem;
+    }
+    .pub-links { display: flex; gap: 0.6rem; flex-wrap: wrap; }
     .pub-links a {
       font-size: 0.8rem;
       border: 1px solid var(--border);
@@ -133,8 +156,9 @@
       text-align: center;
     }
 
-    @media (max-width: 560px) {
-      .hero { flex-direction: column; gap: 1.5rem; }
+    @media (max-width: 580px) {
+      .hero { flex-direction: column-reverse; gap: 1.5rem; align-items: center; }
+      .hero-photo { width: 110px; height: 110px; }
     }
   </style>
 </head>
@@ -158,12 +182,14 @@
       <h1>Moritz Nottebaum</h1>
       <p class="role">PhD Candidate &middot; University of Udine &middot; DMIF</p>
       <p>
-        I am a PhD student in the Machine Learning and Perception Lab at the
-        University of Udine, advised by
+        I am a computer vision researcher and PhD student in the Machine Learning and
+        Perception Lab at the University of Udine, advised by
         <a href="https://machinelearning.uniud.it/team/christian-micheloni/">Christian Micheloni</a>.
         My research focuses on hardware-efficient neural network design for efficient
-        inference &mdash; specifically, building vision backbones that are fast on
-        real hardware beyond just counting multiply-accumulate operations.
+        inference &mdash; in particular, building vision backbones that achieve better
+        speed-accuracy trade-offs on real hardware by going beyond traditional
+        multiply-accumulate (MAC) count metrics. I also work on egocentric vision,
+        video frame interpolation, and object tracking.
       </p>
       <div class="hero-links">
         <a href="https://scholar.google.com/citations?user=y7paI7EAAAAJ&hl=de" target="_blank">
@@ -183,6 +209,7 @@
         </a>
       </div>
     </div>
+    <img class="hero-photo" src="assets/profpic.jpg" alt="Moritz Nottebaum" />
   </div>
 
   <!-- Research Interests -->
@@ -192,11 +219,11 @@
       <span class="tag">Hardware-Efficient Neural Networks</span>
       <span class="tag">Vision Backbones</span>
       <span class="tag">Convolutional &amp; Transformer Architectures</span>
+      <span class="tag">Efficient Inference</span>
       <span class="tag">Video Frame Interpolation</span>
       <span class="tag">Object Detection &amp; Tracking</span>
       <span class="tag">Egocentric Vision</span>
-      <span class="tag">Computer Vision</span>
-      <span class="tag">Machine Learning</span>
+      <span class="tag">Person Re-Identification</span>
     </div>
   </section>
 
@@ -206,9 +233,43 @@
     <div class="pub-list">
 
       <div class="pub">
+        <div class="pub-venue">Under Review &mdash; IJCV 2026</div>
+        <div class="pub-title">Beyond MACs: Hardware Efficient Architecture Design for Vision Backbones</div>
+        <div class="pub-authors"><strong>Moritz Nottebaum</strong>, Matteo Dunnhofer, Christian Micheloni</div>
+        <div class="pub-meta">
+          <span class="pub-tag">Hardware-Efficient Neural Networks</span>
+          <span class="pub-tag">Vision Backbones</span>
+          <span class="pub-tag">Efficient Inference</span>
+        </div>
+        <div class="pub-links">
+          <a href="https://arxiv.org/abs/2603.26551" target="_blank">arXiv</a>
+        </div>
+      </div>
+
+      <div class="pub">
+        <div class="pub-venue">CVPR Findings 2026</div>
+        <div class="pub-title">CPUBone: Efficient Vision Backbone Design for Devices with Low Parallelization Capabilities</div>
+        <div class="pub-authors"><strong>Moritz Nottebaum</strong>, Matteo Dunnhofer, Christian Micheloni</div>
+        <div class="pub-meta">
+          <span class="pub-tag">Hardware-Efficient Neural Networks</span>
+          <span class="pub-tag">Vision Backbones</span>
+          <span class="pub-tag">Efficient Inference</span>
+        </div>
+        <div class="pub-links">
+          <a href="https://arxiv.org/abs/2603.26425" target="_blank">arXiv</a>
+          <a href="https://github.com/altair199797/CPUBone" target="_blank">Code</a>
+        </div>
+      </div>
+
+      <div class="pub">
         <div class="pub-venue">WACV 2025</div>
         <div class="pub-title">LowFormer: Hardware Efficient Design for Convolutional Transformer Backbones</div>
         <div class="pub-authors"><strong>Moritz Nottebaum</strong>, Matteo Dunnhofer, Christian Micheloni</div>
+        <div class="pub-meta">
+          <span class="pub-tag">Hardware-Efficient Neural Networks</span>
+          <span class="pub-tag">Vision Backbones</span>
+          <span class="pub-tag">Convolutional &amp; Transformer Architectures</span>
+        </div>
         <div class="pub-links">
           <a href="https://arxiv.org/abs/2409.03460" target="_blank">arXiv</a>
           <a href="https://openaccess.thecvf.com/content/WACV2025/html/Nottebaum_LowFormer_Hardware_Efficient_Design_for_Convolutional_Transformer_Backbones_WACV2025_paper.html" target="_blank">WACV</a>
@@ -217,18 +278,25 @@
       </div>
 
       <div class="pub">
-        <div class="pub-venue">2025</div>
-        <div class="pub-title">CPUBone: Efficient Vision Backbone Design for Devices with Low Parallelization Capabilities</div>
-        <div class="pub-authors"><strong>Moritz Nottebaum</strong>, Christian Micheloni</div>
+        <div class="pub-venue">ICIAP 2025</div>
+        <div class="pub-title">T-EVO: Tracking in Egovision for Online Visual Episodic Memory</div>
+        <div class="pub-authors"><strong>Moritz Nottebaum</strong>, Zaira Manigrasso, Antonio Finocchiaro, Davide Marana, Rosario Forte, Matteo Dunnhofer, Giovanni Maria Farinella, Antonino Furnari, Christian Micheloni</div>
+        <div class="pub-meta">
+          <span class="pub-tag">Egocentric Vision</span>
+          <span class="pub-tag">Object Detection &amp; Tracking</span>
+        </div>
         <div class="pub-links">
-          <a href="https://scholar.google.com/citations?user=y7paI7EAAAAJ&hl=de" target="_blank">Scholar</a>
         </div>
       </div>
 
       <div class="pub">
-        <div class="pub-venue">arXiv 2024</div>
+        <div class="pub-venue">WACV 2026</div>
         <div class="pub-title">Online Episodic Memory Visual Query Localization with Egocentric Streaming Object Memory</div>
-        <div class="pub-authors"><strong>Moritz Nottebaum</strong> et al.</div>
+        <div class="pub-authors"><strong>Moritz Nottebaum</strong>, Zaira Manigrasso, Matteo Dunnhofer, Antonino Furnari, Antonio Finocchiaro, Davide Marana, Rosario Forte, Giovanni Maria Farinella, Christian Micheloni</div>
+        <div class="pub-meta">
+          <span class="pub-tag">Egocentric Vision</span>
+          <span class="pub-tag">Object Detection &amp; Tracking</span>
+        </div>
         <div class="pub-links">
           <a href="https://arxiv.org/abs/2411.16934" target="_blank">arXiv</a>
         </div>
@@ -238,8 +306,25 @@
         <div class="pub-venue">BMVC 2022</div>
         <div class="pub-title">Efficient Feature Extraction for High-resolution Video Frame Interpolation</div>
         <div class="pub-authors"><strong>Moritz Nottebaum</strong>, Stefan Roth, Simone Schaub-Meyer</div>
+        <div class="pub-meta">
+          <span class="pub-tag">Video Frame Interpolation</span>
+        </div>
         <div class="pub-links">
           <a href="https://arxiv.org/abs/2211.14005" target="_blank">arXiv</a>
+          <a href="https://bmvc2022.mpi-inf.mpg.de/825/" target="_blank">BMVC</a>
+          <a href="https://github.com/visinf/fldr-vfi" target="_blank">Code</a>
+        </div>
+      </div>
+
+      <div class="pub">
+        <div class="pub-venue">Bachelor&rsquo;s Thesis &mdash; TU Darmstadt 2020</div>
+        <div class="pub-title">Person Re-Identification in a Car Seat: Comparison of Cosine Similarity and Triplet Loss based approaches on Capacitive Proximity Sensing data</div>
+        <div class="pub-authors"><strong>Moritz Nottebaum</strong> &mdash; Advisors: Arjan Kuijper, Silvia Rus (Fraunhofer IGD)</div>
+        <div class="pub-meta">
+          <span class="pub-tag">Person Re-Identification</span>
+        </div>
+        <div class="pub-links">
+          <a href="http://publica.fraunhofer.de/dokumente/N-578625.html" target="_blank">Fraunhofer Publica</a>
         </div>
       </div>
 
